@@ -13,31 +13,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Controller {
+public class PersonaController {
     
     @Autowired
     private IPersonaService persoServ;
     
-        @PostMapping ("/persona/save")
-    public void postPersona (@RequestBody Persona persona) {
-        persoServ.crearPersona(persona);
-    }
-    
-    @GetMapping ("/persona/get")
+    @GetMapping ("/personas")
     @ResponseBody
     public List<Persona> getPersonas () {
-        return persoServ.verPersonas();
+        return persoServ.getPersonas();
     }
     
-    @GetMapping ("/persona/get/{id}")
+    @GetMapping ("/personas/{id}")
     @ResponseBody
     public Persona getPersona (@PathVariable Long id) {
-        return persoServ.buscarPersona(id);
+        return persoServ.getPersona(id);
     }
     
-    @DeleteMapping ("/persona/delete/{id}")
-    public void borrarPersona (@PathVariable Long id) {
-        persoServ.borrarPersona(id); 
+    @PostMapping ("/personas")
+    public void savePersona (@RequestBody Persona persona) {
+        persoServ.savePersona(persona);
+    }
+    
+    @DeleteMapping ("/personas/{id}")
+    public void deletePersona (@PathVariable Long id) {
+        persoServ.deletePersona(id); 
     }
     
 }

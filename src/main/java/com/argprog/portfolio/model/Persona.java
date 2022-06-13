@@ -1,17 +1,27 @@
 package com.argprog.portfolio.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.Data;
 
-@Getter @Setter
 @Entity
-public class Persona {
+@Table(name = "persona")
+public @Data
+class Persona {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String email;
     private String password;
@@ -24,24 +34,14 @@ public class Persona {
     private String url_foto;
     private String sobre_mi;
     private Long rol_id;
-
-    public Persona() {
-    }
-
-    public Persona(Long id, String email, String password, String nombre, String apellido, String fecha_nac, String domicilio, Long localidad_id, String telefono, String url_foto, String sobre_mi, Long rol_id) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fecha_nac = fecha_nac;
-        this.domicilio = domicilio;
-        this.localidad_id = localidad_id;
-        this.telefono = telefono;
-        this.url_foto = url_foto;
-        this.sobre_mi = sobre_mi;
-        this.rol_id = rol_id;
-    }
     
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Experiencia> experiencias = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Formacion> formaciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Competencia> competencias = new ArrayList<>();
     
 }
