@@ -32,8 +32,8 @@ public class FormacionController {
     
     @GetMapping ("/personas/{id}/formaciones")
     @ResponseBody
-    public List<Formacion> getFormacionbyPersonaId (@PathVariable Long id) {
-        return formaServ.getFormacionbyPersonaId(id);
+    public List<Formacion> getFormacionByPersonaId (@PathVariable Long id) {
+        return formaServ.getFormacionByPersonaId(id);
     }
     
     @PostMapping ("/personas/{id}/formaciones")

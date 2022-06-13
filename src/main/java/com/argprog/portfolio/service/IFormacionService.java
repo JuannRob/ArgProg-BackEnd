@@ -14,6 +14,6 @@ public interface IFormacionService {
     
     public Formacion getFormacion (Long id);
     
-    public List<Formacion> getFormacionbyPersonaId (Long persona_id);
+    public List<Formacion> getFormacionByPersonaId (Long persona_id);
     
 }

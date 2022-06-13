@@ -44,7 +44,7 @@ public class ExpService implements IExpService {
     }
     
     @Override
-    public List<Experiencia> getExperienciasbyPersonaId (Long persona_id){
+    public List<Experiencia> getExperienciasByPersonaId (Long persona_id){
         return expRepo.findByPersona_Id(persona_id);
     }
     

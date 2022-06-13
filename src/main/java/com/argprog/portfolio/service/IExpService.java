@@ -14,6 +14,6 @@ public interface IExpService {
     
     public Experiencia getExperiencia (Long id);
     
-    public List<Experiencia> getExperienciasbyPersonaId (Long persona_id);
+    public List<Experiencia> getExperienciasByPersonaId (Long persona_id);
     
 }

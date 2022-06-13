@@ -32,8 +32,8 @@ public class ExpController {
     
     @GetMapping ("/personas/{id}/experiencias")
     @ResponseBody
-    public List<Experiencia> getExperienciabyPersonaId (@PathVariable Long id) {
-        return expServ.getExperienciasbyPersonaId(id);
+    public List<Experiencia> getExperienciaByPersonaId (@PathVariable Long id) {
+        return expServ.getExperienciasByPersonaId(id);
     }
     
     @PostMapping ("/personas/{id}/experiencias")

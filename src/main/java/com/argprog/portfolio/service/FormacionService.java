@@ -39,7 +39,7 @@ public class FormacionService implements IFormacionService{
     }
 
     @Override
-    public List<Formacion> getFormacionbyPersonaId(Long persona_id) {
+    public List<Formacion> getFormacionByPersonaId(Long persona_id) {
         return formaRepo.findByPersona_Id(persona_id);
     }
     
