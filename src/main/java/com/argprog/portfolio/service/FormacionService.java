@@ -22,10 +22,10 @@ public class FormacionService implements IFormacionService{
     }
 
     @Override
-    public void saveFormacion(Formacion exp, Long persona_id) {
+    public void saveFormacion(Formacion form, Long persona_id) {
         Persona persona = persoServ.getPersona(persona_id);
-        exp.setPersona(persona);
-        formaRepo.save(exp);
+        form.setPersona(persona);
+        formaRepo.save(form);
     }
 
     @Override

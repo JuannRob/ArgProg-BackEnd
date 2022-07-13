@@ -1,6 +1,7 @@
 package com.argprog.portfolio.service;
 
 import com.argprog.portfolio.model.Persona;
+import com.argprog.portfolio.model.Rol;
 import com.argprog.portfolio.repository.PersonaRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ public class PersonaService implements IPersonaService {
     
     @Autowired
     public PersonaRepository persoRepo;
+    
+    @Autowired
+    private IRolService rolServ;
 
     @Override
     public List<Persona> getPersonas() {
@@ -18,7 +22,9 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
-    public void savePersona(Persona pers) {
+    public void savePersona(Persona pers, Long rol_id) {
+        Rol rol = rolServ.getRol(rol_id);
+        pers.setRol(rol);
         persoRepo.save(pers);
     }
 

@@ -7,13 +7,15 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "nivel")
-public @Data        
-class Nivel {
+@Table(name="idioma")
+public @Data
+class Idioma {
     
     @Id
     @JsonIgnore
     private Long id;
+    private String codigo;
+    private String idioma;
     
-    private String titulo;
+    
 }

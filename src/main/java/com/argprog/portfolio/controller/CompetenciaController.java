@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,9 +37,9 @@ public class CompetenciaController {
         return compServ.getCompetenciaByPersonaId(id);
     }
     
-    @PostMapping ("/personas/{id}/competencias/{nivelId}")
-    public void saveCompetencia (@RequestBody Competencia comp, @PathVariable Long id, @PathVariable Long nivelId) {
-        compServ.saveCompetencia(comp, nivelId, id);
+    @PostMapping ("/personas/{id}/competencias")
+    public void saveCompetencia (@RequestBody Competencia comp, @PathVariable Long id, @RequestParam Long nivel) {
+        compServ.saveCompetencia(comp, nivel, id);
     }
     
     @DeleteMapping ("/competencias/{id}")
