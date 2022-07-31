@@ -9,35 +9,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Controller {
+public class PersonaController {
     
     @Autowired
     private IPersonaService persoServ;
     
-        @PostMapping ("/persona/save")
-    public void postPersona (@RequestBody Persona persona) {
-        persoServ.crearPersona(persona);
-    }
-    
-    @GetMapping ("/persona/get")
+    @GetMapping ("/personas")
     @ResponseBody
     public List<Persona> getPersonas () {
-        return persoServ.verPersonas();
+        return persoServ.getPersonas();
     }
     
-    @GetMapping ("/persona/get/{id}")
+    @GetMapping ("/personas/{id}")
     @ResponseBody
     public Persona getPersona (@PathVariable Long id) {
-        return persoServ.buscarPersona(id);
+        return persoServ.getPersona(id);
     }
     
-    @DeleteMapping ("/persona/delete/{id}")
-    public void borrarPersona (@PathVariable Long id) {
-        persoServ.borrarPersona(id); 
+    @PostMapping ("/personas")
+    public void savePersona (@RequestBody Persona persona) {
+        persoServ.savePersona(persona);
     }
     
+    @PostMapping ("/personas/{pers_id}")
+    public void changeRol (@PathVariable Long pers_id,
+                           @RequestParam Long rol_id) {
+        persoServ.changeRol(pers_id, rol_id);
+    }
+    
+    @DeleteMapping ("/personas/{id}")
+    public void deletePersona (@PathVariable Long id) {
+        persoServ.deletePersona(id); 
+    }  
 }
