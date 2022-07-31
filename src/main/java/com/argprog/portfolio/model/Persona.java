@@ -1,23 +1,67 @@
 package com.argprog.portfolio.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import lombok.Data;
 
-@Getter @Setter
-public class Persona {
-
+@Entity
+@Table(name = "persona")
+public @Data
+class Persona {
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    private String email;
+    private String password;
     private String nombre;
     private String apellido;
-
-    public Persona() {
-    }
-
-    public Persona(Long id, String nombre, String apellido) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-    }
+    private String titulo;
+    private String fecha_nac;
+    private String domicilio;
+    private String telefono;
+    private String url_foto;
+    private String sobre_mi;
+    private String url_cover;
     
+    @OneToOne
+    @JoinColumn(name = "localidad_id", referencedColumnName = "id")
+    private Localidad localidad;
+    
+    @OneToOne
+    @JoinColumn(name = "rol_id", referencedColumnName = "id")
+    private Rol rol;
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Experiencia> experiencias = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Formacion> formaciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Competencia> competencias = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Extra> extras = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Persona_Idioma_Nivel> idiomas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Link> links = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Proyectos> proyectos = new ArrayList<>();
     
 }
