@@ -12,19 +12,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
+
 @Entity
-@Table(name="certificacion")
+@Table(name = "persona_idioma_nivel")
 public @Data
-class Certificacion {
+class Persona_Idioma_Nivel {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String titulo;
-    private String link;
     
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "idioma_id_idx"), name = "idioma_id", referencedColumnName="id")
+    private Idioma idioma;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "nivel_id_idx"), name = "nivel_id", referencedColumnName="id")
+    private Nivel nivel;
+        
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_certificacion_persona1"), name = "persona_id", referencedColumnName="id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "persona_id_idx"), name = "persona_id", referencedColumnName="id")
     @JsonIgnore
     private Persona persona;
     

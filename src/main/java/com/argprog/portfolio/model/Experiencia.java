@@ -21,6 +21,7 @@ class Experiencia {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String empresa;
+    private String puesto;
     private String fecha_inicio;
     private String fecha_fin;
     private String descripcion;

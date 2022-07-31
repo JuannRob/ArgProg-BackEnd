@@ -1,5 +1,7 @@
 package com.argprog.portfolio.model;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -21,6 +23,7 @@ class Provincia {
     private String nombre;
     
     @OneToMany(mappedBy = "provincia")
+    @JsonManagedReference
     private List<Localidad> localidades = new ArrayList<>();
     
 }

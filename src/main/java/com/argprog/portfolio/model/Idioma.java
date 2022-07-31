@@ -17,5 +17,4 @@ class Idioma {
     private String codigo;
     private String idioma;
     
-    
 }

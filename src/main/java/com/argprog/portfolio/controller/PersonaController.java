@@ -32,14 +32,18 @@ public class PersonaController {
     }
     
     @PostMapping ("/personas")
-    public void savePersona (@RequestBody Persona persona,
-                             @RequestParam Long rol) {
-        persoServ.savePersona(persona, rol);
+    public void savePersona (@RequestBody Persona persona) {
+        persoServ.savePersona(persona);
+    }
+    
+    @PostMapping ("/personas/{pers_id}")
+    public void changeRol (@PathVariable Long pers_id,
+                           @RequestParam Long rol_id) {
+        persoServ.changeRol(pers_id, rol_id);
     }
     
     @DeleteMapping ("/personas/{id}")
     public void deletePersona (@PathVariable Long id) {
         persoServ.deletePersona(id); 
-    }
-    
+    }  
 }

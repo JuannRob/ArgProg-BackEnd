@@ -9,26 +9,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "competencia")
-public @Data 
-class Competencia {
+@Table(name="proyectos")
+public @Data
+class Proyectos {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nombre;
+    private String link;
+    private String fecha;
+    private String descripcion;
     
-    @ManyToOne
-    @JoinColumn(name = "nivel_id", referencedColumnName = "id")
-    private Nivel nivel;
-        
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_competencia_persona1_idx"), name = "persona_id", referencedColumnName="id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_proyectos_persona1"), name = "persona_id", referencedColumnName="id")
     @JsonIgnore
-    private Persona persona;
+    private Persona persona;    
+    
 }

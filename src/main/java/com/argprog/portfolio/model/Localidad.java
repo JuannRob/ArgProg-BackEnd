@@ -1,6 +1,6 @@
 package com.argprog.portfolio.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +24,6 @@ class Localidad {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_localidad_provincia1_idx"), name = "provincia_id", referencedColumnName="id")
-    @JsonIgnore
+    @JsonBackReference
     private Provincia provincia;
 }

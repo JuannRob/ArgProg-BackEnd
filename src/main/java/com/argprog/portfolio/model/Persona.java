@@ -27,11 +27,13 @@ class Persona {
     private String password;
     private String nombre;
     private String apellido;
+    private String titulo;
     private String fecha_nac;
     private String domicilio;
     private String telefono;
     private String url_foto;
     private String sobre_mi;
+    private String url_cover;
     
     @OneToOne
     @JoinColumn(name = "localidad_id", referencedColumnName = "id")
@@ -54,7 +56,12 @@ class Persona {
     private List<Extra> extras = new ArrayList<>();
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Persona_Idioma_Nivel> idiomas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Link> links = new ArrayList<>();
     
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Proyectos> proyectos = new ArrayList<>();
     
 }
