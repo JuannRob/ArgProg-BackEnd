@@ -1,47 +1,67 @@
 package com.argprog.portfolio.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import lombok.Data;
 
-@Getter @Setter
 @Entity
-public class Persona {
+@Table(name = "persona")
+public @Data
+class Persona {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String email;
     private String password;
     private String nombre;
     private String apellido;
+    private String titulo;
     private String fecha_nac;
     private String domicilio;
-    private Long localidad_id;
     private String telefono;
     private String url_foto;
     private String sobre_mi;
-    private Long rol_id;
-
-    public Persona() {
-    }
-
-    public Persona(Long id, String email, String password, String nombre, String apellido, String fecha_nac, String domicilio, Long localidad_id, String telefono, String url_foto, String sobre_mi, Long rol_id) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fecha_nac = fecha_nac;
-        this.domicilio = domicilio;
-        this.localidad_id = localidad_id;
-        this.telefono = telefono;
-        this.url_foto = url_foto;
-        this.sobre_mi = sobre_mi;
-        this.rol_id = rol_id;
-    }
+    private String url_cover;
     
+    @OneToOne
+    @JoinColumn(name = "localidad_id", referencedColumnName = "id")
+    private Localidad localidad;
+    
+    @OneToOne
+    @JoinColumn(name = "rol_id", referencedColumnName = "id")
+    private Rol rol;
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Experiencia> experiencias = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Formacion> formaciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Competencia> competencias = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Extra> extras = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Persona_Idioma_Nivel> idiomas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Link> links = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Proyectos> proyectos = new ArrayList<>();
     
 }
